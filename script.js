@@ -38,8 +38,10 @@ const tracks = [
 ]
 
 const numTracks = tracks.length;
+// calculates total playlist duration in mins
 const playingTime = `${ Math.ceil(countDuration(tracks) / 60)} mins`;
 
+// calculates total playlist duration in seconds
 function countDuration(arr) {
     let total = 0;
     for(let i = 0; i < arr.length; i++){
@@ -63,10 +65,56 @@ const playListDuration = document.querySelector('.playlist-duration');
 const albumArt = document.querySelector('.album-art');
 const songTitles = document.querySelectorAll('.title');
 
+const volumeDisplay = document.querySelector('.volume-display');
+const volBar = document.querySelector('.volume-bar');
+
+// renders playingTime on the page
 playListDuration.innerText = playingTime;
 
 // initialise current track no 
 let trackIdx = -1;
+
+// initialise volume variable
+let vol = audio.volume;
+let volHeight = 100;
+volBorderRadius();
+
+function volBorderRadius(){
+    if (vol == 1){
+        volumeDisplay.style.borderRadius = `8px`;
+    } else {
+        volumeDisplay.style.borderRadius = `0 0 8px 8px`;
+    }
+}
+
+function volLogic(){
+    if (vol > 1){
+        vol = 1;
+    } else if (vol < 0){
+        vol = 0;
+    }
+    audio.volume = vol;
+    volHeight = vol * 100 ;
+    volBorderRadius();
+    volumeDisplay.style.height = `${volHeight}%`;
+}
+
+// listen for volume keys 
+document.addEventListener('keydown', function(event){
+    adjustVol(event);
+});
+
+// logic to adjust volume based on 'u' and 'd' keys
+function adjustVol(event){
+    // console.log(event);
+    if (event.keyCode == 85){
+        vol += 0.1;
+        volLogic();
+    } else if (event.keyCode == 68){
+        vol -= 0.1;
+        volLogic();
+    }
+}
 
 // like button
 heart.addEventListener('click', function() {

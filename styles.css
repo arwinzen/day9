@@ -19,6 +19,7 @@ html, body{
     background: linear-gradient( #2C5364,#203A43, #0F2027 90%);
     background: linear-gradient( #F0F2F0, #2C5364, #0F2027 55%);
     color: white;
+    position: relative;
     /* min-width: 500px ;
     min-height: 100px; */
 }
@@ -39,6 +40,35 @@ li {
 
 .fade-in {
     transition: all 1s;
+}
+
+.volume-bar {
+    background-color: #444;
+    height: 120px;
+    width: 25px;
+    position: absolute;
+    border-radius: 8px;
+    top: 50px;
+    z-index: 1;
+}
+
+.volume-display {
+    height: 100%;
+    width: 25px;
+    position: absolute;
+    bottom: 0px;
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+    z-index: 1;
+}
+
+.fa-volume-up {
+    font-size: 14px;
+    position: absolute;
+    top: 100px;
+    left: 4px;
+    color: #777;
+    z-index: 2;
 }
 
 .player{
@@ -67,7 +97,6 @@ li {
     grid-template-rows: 1fr 1fr;
     box-shadow: 2px 2px 3px black;
     margin-top: 1em;
-    transition: all 10s;
     /* justify-content: center; */
 
     /* display: flex;
