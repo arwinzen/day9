@@ -88,6 +88,8 @@ function volBorderRadius(){
 }
 
 function volLogic(){
+    // volBar.style.visibility = 'visible';
+
     if (vol > 1){
         vol = 1;
     } else if (vol < 0){
@@ -97,6 +99,12 @@ function volLogic(){
     volHeight = vol * 100 ;
     volBorderRadius();
     volumeDisplay.style.height = `${volHeight}%`;
+
+    // volBar.classList.add('fadeout');
+    // setTimeout(function(){
+    //     volBar.classList.remove('fadeout');
+    //     volBar.style.visibility = 'hidden';
+    // }, 2500);
 }
 
 // listen for volume keys 
