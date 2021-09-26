@@ -170,6 +170,7 @@ li {
 
 .fa-heart {
     color: transparent;
+    /* outline for fontawesome icons */
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: white;
 }

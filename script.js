@@ -1,4 +1,4 @@
-// console.log('hey');
+// store track information in an array of objects
 const tracks = [
     {
         src: 'audio/DancingInTheMoonlight.m4a',
@@ -37,11 +37,13 @@ const tracks = [
     }
 ]
 
+// length of the playlist
 const numTracks = tracks.length;
-// calculates total playlist duration in mins
+
+// calculates total playlist duration (in mins)
 const playingTime = `${ Math.ceil(countDuration(tracks) / 60)} mins`;
 
-// calculates total playlist duration in seconds
+// calculates total playlist duration (in seconds)
 function countDuration(arr) {
     let total = 0;
     for(let i = 0; i < arr.length; i++){
@@ -77,8 +79,11 @@ let trackIdx = -1;
 // initialise volume variable
 let vol = audio.volume;
 let volHeight = 100;
+
+// function to set border radius for the vol display
 volBorderRadius();
 
+// vol display bar should have no border radius at 100% height
 function volBorderRadius(){
     if (vol == 1){
         volumeDisplay.style.borderRadius = `8px`;
@@ -87,15 +92,20 @@ function volBorderRadius(){
     }
 }
 
+// logic to handle volume
 function volLogic(){
     // volBar.style.visibility = 'visible';
 
+    // sets range of vol to be always from between 0 and 1
     if (vol > 1){
         vol = 1;
     } else if (vol < 0){
         vol = 0;
     }
+
     audio.volume = vol;
+
+    // increment vol bar height based on vol
     volHeight = vol * 100 ;
     volBorderRadius();
     volumeDisplay.style.height = `${volHeight}%`;
@@ -134,6 +144,7 @@ play.addEventListener('click', playPause);
 
 // play button logic
 function playPause(){
+    // for first click of play btn
     if (trackIdx == -1 && audio.paused){
         trackIdx += 1;
         changeTrack();
@@ -148,21 +159,27 @@ function playPause(){
     }
 }
 
+// logic for changing tracks
 function changeTrack(){
     audio.src = tracks[trackIdx].src;
+
+    // change album art based on selected song
     albumArt.innerHTML = `<img src="${tracks[trackIdx].albumArt}"" alt="${tracks[trackIdx].artist}">`
     albumArt.style.display = 'block';
+
     audio.play();
     play.innerHTML = pauseIcon;
+
+    // change now playing track title to green
     highlightTrack(trackIdx);
 }
 
-
-// logic for skip track btns
+// add event listener for for skip forward track btn
 skipFwd.addEventListener('click', function(){
     skipTrack(1);
 });
 
+// add event listener for skip backward track btn
 skipPrev.addEventListener('click', function(){
     skipTrack(-1);
 });
@@ -175,14 +192,18 @@ function highlightTrack(trackno){
     songTitles[trackno].classList.add('like');
 }
 
+// logic to keep track of trackIdx
 function skipTrack(num){
     console.log(trackIdx + num > numTracks -1);
+    // increment / decrement track index
     trackIdx += num;
+    // keep trackIdx always between 0 and 4
     if (trackIdx > numTracks -1){
         trackIdx = 0;
     } else if (trackIdx < 0){
         trackIdx = numTracks - 1;
     }
+    // run logic to change track
     changeTrack();
 }
 
@@ -191,6 +212,7 @@ for (let i = 0; i < trackList.length; i++){
     trackList[i].addEventListener('click', function(){
         // update track index
         trackIdx = i;
+        // run logic to change track
         changeTrack();
     })
 }
