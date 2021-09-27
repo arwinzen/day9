@@ -63,7 +63,7 @@ li {
     text-align: center;
     top: 5px;
     animation-name: vol-readme;
-    animation-duration: 7s;
+    animation-duration: 5s;
     animation-delay: 1s;
     animation-fill-mode: both;
 }
@@ -91,6 +91,7 @@ li {
     border-radius: 8px;
     top: 50px;
     z-index: 1;
+    overflow: hidden;
 }
 
 .volume-display {

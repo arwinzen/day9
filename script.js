@@ -80,18 +80,6 @@ let trackIdx = -1;
 let vol = audio.volume;
 let volHeight = 100;
 
-// function to set border radius for the vol display
-volBorderRadius();
-
-// vol display bar should have no border radius at 100% height
-function volBorderRadius(){
-    if (vol == 1){
-        volumeDisplay.style.borderRadius = `8px`;
-    } else {
-        volumeDisplay.style.borderRadius = `0 0 8px 8px`;
-    }
-}
-
 // logic to handle volume
 function volLogic(){
     // volBar.style.visibility = 'visible';
@@ -107,7 +95,6 @@ function volLogic(){
 
     // increment vol bar height based on vol
     volHeight = vol * 100 ;
-    volBorderRadius();
     volumeDisplay.style.height = `${volHeight}%`;
 
     // volBar.classList.add('fadeout');
